@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MozgAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #060b1a, #02040a);
+      color: white;
+    }
+
+    .logo {
+      width: 420px;
+      max-width: 90%;
+      margin-bottom: 60px;
+      filter: drop-shadow(0 0 40px rgba(0,255,255,0.25))
+              drop-shadow(0 0 40px rgba(200,0,255,0.25));
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 22px 50px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-event {
+      background: linear-gradient(135deg, #00eaff, #3b82f6);
+      box-shadow: 0 0 25px rgba(0,234,255,0.4);
+    }
+
+    .btn-finance {
+      background: linear-gradient(135deg, #7c3aed, #ec4899);
+      box-shadow: 0 0 25px rgba(168,85,247,0.4);
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(255,255,255,0.2);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-width: 600px) {
+      .logo { width: 300px; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Put your logo file in the same folder as this HTML and name it logo.png -->
+  <img src="logo.png" class="logo" alt="MozgAI">
+
+  <div class="buttons">
+    <button class="btn btn-event" onclick="goTo('event')">EventOrg</button>
+    <button class="btn btn-finance" onclick="goTo('finance')">Household Finance</button>
+  </div>
+
+  <script>
+    const EVENTORG_URL = 'https://your-eventorg-link-here';
+    const HOUSEHOLD_FINANCE_URL = 'https://your-household-finance-link-here';
+
+    function goTo(type) {
+      if (type === 'event') {
+        window.location.href = EVENTORG_URL;
+      } else {
+        window.location.href = HOUSEHOLD_FINANCE_URL;
+      }
+    }
+  </script>
+
+</body>
+</html>
