@@ -20,12 +20,30 @@
       color: white;
     }
 
+    .logo-wrap {
+      position: relative;
+      width: min(90%, 460px);
+      margin-bottom: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px;
+      border-radius: 22px;
+      background: radial-gradient(circle at center,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.08) 45%,
+        rgba(255,255,255,0) 80%);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12),
+                  0 10px 40px rgba(0,0,0,0.35);
+      backdrop-filter: blur(2px);
+    }
+
     .logo {
       width: 420px;
-      max-width: 90%;
-      margin-bottom: 60px;
-      filter: drop-shadow(0 0 40px rgba(0,255,255,0.25))
-              drop-shadow(0 0 40px rgba(200,0,255,0.25));
+      max-width: 100%;
+      filter: brightness(1.16) contrast(1.12)
+              drop-shadow(0 0 38px rgba(0,255,255,0.3))
+              drop-shadow(0 0 32px rgba(200,0,255,0.3));
     }
 
     .buttons {
@@ -66,6 +84,7 @@
     }
 
     @media (max-width: 600px) {
+      .logo-wrap { width: 100%; padding: 14px; margin-bottom: 40px; }
       .logo { width: 300px; }
       .btn { width: 100%; text-align: center; }
     }
@@ -75,7 +94,9 @@
 <body>
 
   <!-- Put your logo file in the same folder as this HTML and name it logo.png -->
-  <img src="logo.png" class="logo" alt="MozgAI">
+  <div class="logo-wrap">
+    <img src="logo.png" class="logo" alt="MozgAI">
+  </div>
 
   <div class="buttons">
     <button class="btn btn-event" onclick="goTo('event')">EventOrg</button>
