@@ -11,19 +11,30 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at center, #c2c8d3 0%, #a9b1bf 14%, #566073 28%, #000000 45%, #000000 100%);
+      gap: 56px;
+      background: radial-gradient(circle at center, #8c94a1 0%, #757f90 20%, #4a5261 42%, #1b1f27 58%, #000000 68%, #000000 100%);
       color: white;
+      padding: 24px;
+    }
+
+    .logo-wrap {
+      width: min(78vw, 520px);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0) 70%);
     }
 
     .logo {
-      width: 420px;
-      max-width: 90%;
-      margin-bottom: 60px;
+      width: min(76%, 420px);
+      max-width: 100%;
       filter: brightness(1.1) contrast(1.08)
               drop-shadow(0 0 32px rgba(255,255,255,0.2));
     }
@@ -66,7 +77,8 @@
     }
 
     @media (max-width: 600px) {
-      .logo { width: 300px; margin-bottom: 40px; }
+      body { gap: 42px; }
+      .logo-wrap { width: min(88vw, 420px); }
       .btn { width: 100%; text-align: center; }
     }
   </style>
@@ -75,7 +87,9 @@
 <body>
 
   <!-- Put your logo file in the same folder as this HTML and name it logo.png -->
-  <img src="logo.png" class="logo" alt="MozgAI">
+  <div class="logo-wrap">
+    <img src="logo.png" class="logo" alt="MozgAI">
+  </div>
 
   <div class="buttons">
     <button class="btn btn-event" onclick="goTo('event')">EventOrg</button>
