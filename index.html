@@ -3,128 +3,277 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MozgAI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>MozgAI App Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-1: #04060b;
+      --bg-2: #0f172a;
+      --card: rgba(15, 23, 42, 0.72);
+      --card-border: rgba(148, 163, 184, 0.25);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --event-gradient: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
+      --finance-gradient: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+      --radius: 20px;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.38);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
+      color: var(--text);
       min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      background: radial-gradient(circle at center, #8c94a1 0%, #757f90 20%, #4a5261 42%, #1b1f27 58%, #000000 68%, #000000 100%);
-      color: white;
-      padding: 24px;
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(34, 211, 238, 0.22), transparent 55%),
+        radial-gradient(900px 600px at 90% 10%, rgba(139, 92, 246, 0.24), transparent 55%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      padding: clamp(24px, 5vw, 56px);
     }
 
-    .hero {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
+    .container {
+      width: min(1080px, 100%);
+      margin: 0 auto;
     }
 
-    .logo-wrap {
-      width: min(78vw, 520px);
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
+    .header {
       display: flex;
+      gap: 20px;
       align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0) 70%);
+      margin-bottom: 30px;
+      flex-wrap: wrap;
     }
 
     .logo {
-      width: min(76%, 420px);
-      max-width: 100%;
-      filter: brightness(1.1) contrast(1.08)
-              drop-shadow(0 0 32px rgba(255,255,255,0.2));
-    }
-
-    .buttons {
-      position: fixed;
-      left: 50%;
-      bottom: clamp(24px, 8vh, 72px);
-      transform: translateX(-50%);
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: min(100%, 920px);
-      z-index: 2;
-    }
-
-    .btn {
-      padding: 22px 50px;
-      font-size: 18px;
-      font-weight: 600;
+      width: 72px;
+      height: 72px;
       border-radius: 16px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 10px;
+      backdrop-filter: blur(8px);
+    }
+
+    .title-group h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .title-group p {
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 18px);
+      max-width: 660px;
+      line-height: 1.5;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 10px 0 18px;
+      font-size: 13px;
+      color: #e2e8f0;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, #22d3ee, #a855f7);
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 24px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .app-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .icon-event {
+      background: var(--event-gradient);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.45);
+    }
+
+    .icon-finance {
+      background: var(--finance-gradient);
+      box-shadow: 0 12px 24px rgba(139, 92, 246, 0.45);
+    }
+
+    .app-card h2 {
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    .app-card p {
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #e2e8f0;
+      background: rgba(148, 163, 184, 0.15);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .app-button {
+      margin-top: 8px;
       border: none;
+      border-radius: 12px;
+      padding: 13px 16px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.25s ease;
-      letter-spacing: 0.5px;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      width: 100%;
+    }
+
+    .app-button:hover {
+      transform: scale(1.01);
+      filter: brightness(1.07);
+    }
+
+    .app-button:active {
+      transform: scale(0.985);
     }
 
     .btn-event {
-      background: linear-gradient(135deg, #00eaff, #3b82f6);
-      box-shadow: 0 0 25px rgba(0,234,255,0.4);
+      background: var(--event-gradient);
     }
 
     .btn-finance {
-      background: linear-gradient(135deg, #7c3aed, #ec4899);
-      box-shadow: 0 0 25px rgba(168,85,247,0.4);
+      background: var(--finance-gradient);
     }
 
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 40px rgba(255,255,255,0.2);
+    .footer-note {
+      margin-top: 26px;
+      color: #94a3b8;
+      font-size: 13px;
     }
 
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    @media (max-width: 600px) {
-      .logo-wrap { width: min(88vw, 420px); }
-      .buttons {
-        width: calc(100% - 40px);
-        gap: 14px;
+    @media (max-width: 640px) {
+      .header {
+        margin-bottom: 22px;
       }
-      .btn { width: 100%; text-align: center; }
+
+      .logo {
+        width: 58px;
+        height: 58px;
+      }
+
+      .app-card {
+        padding: 18px;
+      }
     }
   </style>
 </head>
-
 <body>
+  <main class="container">
+    <header class="header">
+      <img src="logo.png" class="logo" alt="MozgAI logo">
+      <div class="title-group">
+        <h1>MozgAI Web App Hub</h1>
+        <p>One clean page where users can discover, compare, and quickly open your different apps.</p>
+      </div>
+    </header>
 
-  <!-- Put your logo file in the same folder as this HTML and name it logo.png -->
-  <div class="hero">
-    <div class="logo-wrap">
-      <img src="logo.png" class="logo" alt="MozgAI">
-    </div>
-  </div>
+    <div class="section-label">Available Apps</div>
 
-  <div class="buttons">
-    <button class="btn btn-event" onclick="goTo('event')">EventOrg</button>
-    <button class="btn btn-finance" onclick="goTo('finance')">Household Finance</button>
-  </div>
+    <section class="apps-grid" aria-label="List of MozgAI web apps">
+      <article class="app-card">
+        <div class="app-icon icon-event">E</div>
+        <h2>EventOrg</h2>
+        <p>Plan events with less chaos. Organize attendees, structure schedules, and keep event details in one place.</p>
+        <div class="tag-row" aria-label="EventOrg highlights">
+          <span class="tag">Planning</span>
+          <span class="tag">Collaboration</span>
+          <span class="tag">Scheduling</span>
+        </div>
+        <button class="app-button btn-event" onclick="openApp('event')" aria-label="Open EventOrg">Open EventOrg</button>
+      </article>
+
+      <article class="app-card">
+        <div class="app-icon icon-finance">F</div>
+        <h2>Household Finance</h2>
+        <p>Track spending, review household budgets, and make practical money decisions with a simple assistant.</p>
+        <div class="tag-row" aria-label="Household Finance highlights">
+          <span class="tag">Budgeting</span>
+          <span class="tag">Expenses</span>
+          <span class="tag">Insights</span>
+        </div>
+        <button class="app-button btn-finance" onclick="openApp('finance')" aria-label="Open Household Finance">Open Household Finance</button>
+      </article>
+    </section>
+
+    <p class="footer-note">Tip: Add more cards using the same structure when you launch new apps.</p>
+  </main>
 
   <script>
-    const EVENTORG_URL = "https://webapp-usq6.vercel.app/";
-    const HOUSEHOLD_FINANCE_URL = "https://household-assistant-tawny.vercel.app/login";
+    const APPS = {
+      event: 'https://webapp-usq6.vercel.app/',
+      finance: 'https://household-assistant-tawny.vercel.app/login'
+    };
 
-    function goTo(type) {
-      if (type === 'event') {
-        window.location.href = EVENTORG_URL;
-      } else {
-        window.location.href = HOUSEHOLD_FINANCE_URL;
+    function openApp(appKey) {
+      const targetUrl = APPS[appKey];
+      if (targetUrl) {
+        window.location.href = targetUrl;
       }
     }
   </script>
-
 </body>
 </html>
