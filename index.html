@@ -12,14 +12,20 @@
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 56px;
+      position: relative;
+      overflow: hidden;
       background: radial-gradient(circle at center, #8c94a1 0%, #757f90 20%, #4a5261 42%, #1b1f27 58%, #000000 68%, #000000 100%);
       color: white;
       padding: 24px;
+    }
+
+    .hero {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
     }
 
     .logo-wrap {
@@ -40,10 +46,16 @@
     }
 
     .buttons {
+      position: fixed;
+      left: 50%;
+      bottom: clamp(24px, 8vh, 72px);
+      transform: translateX(-50%);
       display: flex;
       gap: 30px;
       flex-wrap: wrap;
       justify-content: center;
+      width: min(100%, 920px);
+      z-index: 2;
     }
 
     .btn {
@@ -77,8 +89,11 @@
     }
 
     @media (max-width: 600px) {
-      body { gap: 42px; }
       .logo-wrap { width: min(88vw, 420px); }
+      .buttons {
+        width: calc(100% - 40px);
+        gap: 14px;
+      }
       .btn { width: 100%; text-align: center; }
     }
   </style>
@@ -87,8 +102,10 @@
 <body>
 
   <!-- Put your logo file in the same folder as this HTML and name it logo.png -->
-  <div class="logo-wrap">
-    <img src="logo.png" class="logo" alt="MozgAI">
+  <div class="hero">
+    <div class="logo-wrap">
+      <img src="logo.png" class="logo" alt="MozgAI">
+    </div>
   </div>
 
   <div class="buttons">
